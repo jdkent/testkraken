@@ -109,15 +109,15 @@ def generate_dockerfile(neurodocker_dict):
     """
     cmd = "docker run --rm -i -a stdin -a stdout {image} generate docker -"
     cmd = cmd.format(image=NEURODOCKER_IMAGE)
-    pdb.set_trace()
-    neurodcoker dict wyglada dla mnie dobrze, ale nie dziala
-    moze powinnam przejsc najpierw do najnowszego neurodockera
+    # pdb.set_trace()
+    # neurodcoker dict wyglada dla mnie dobrze, ale nie dziala
+    # moze powinnam przejsc najpierw do najnowszego neurodockera
     output = subprocess.run(
         cmd.split(),
         input=json.dumps(neurodocker_dict).encode(),
         check=True,
         stdout=subprocess.PIPE).stdout.decode()
-    pdb.set_trace()
+    # pdb.set_trace()
     return output
 
 
@@ -154,7 +154,7 @@ def build_image(filepath, build_context=None, tag=None, build_opts=None):
     filepath = os.path.abspath(filepath)
 
     if build_context is not None:
-        build_context = os.path.abspath("build_context)
+        build_context = os.path.abspath(build_context)
         cmd += " -f {} {}".format(filepath, build_context)
         input = None
     else:
