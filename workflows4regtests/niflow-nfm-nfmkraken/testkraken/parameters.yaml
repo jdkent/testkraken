@@ -1,0 +1,22 @@
+command: bash
+script: script.sh
+env:
+  base:
+    - image: 'ubuntu:16.04'
+      pkg-manager: apt
+  fsl:
+    - version: 5.0.9
+  miniconda:
+    - conda_install:
+        - python=3.6
+        - nipype
+        - pip
+  copy:
+    - [package, /pack]
+  run:
+    - "${isource} activate testkraut && /opt/miniconda-latest/envs/testkraut/bin/pip install /pack"
+
+tests:
+ - file: graph.json
+   name: test0
+   script: test_obj_eq.py
